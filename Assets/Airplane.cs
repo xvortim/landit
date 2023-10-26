@@ -6,6 +6,7 @@ public class Airplane : MonoBehaviour
 {
 	public float thrust   = 30f;
 	public float defaultLift = -0.001f;
+	public float defaultMotion = 0.5f;
 
 	Rigidbody rb;
 	
@@ -23,12 +24,12 @@ public class Airplane : MonoBehaviour
 		
 		// Airplane Controls
 		
-		if(Input.GetKey(KeyCode.W)) { transform.Rotate(0.1f,0,0);  };
+		if(Input.GetKey(KeyCode.W)) { transform.Rotate(defaultMotion,0,0);     };
 			
-		if(Input.GetKey(KeyCode.S)) { transform.Rotate(-0.5f,0,0);   };
+		if(Input.GetKey(KeyCode.S)) { transform.Rotate(-(defaultMotion),0,0);  };
 			
-		if(Input.GetKey(KeyCode.A)) { transform.Rotate(0,0,0.3f);  };
+		if(Input.GetKey(KeyCode.A)) { transform.Rotate(0,0,defaultMotion);     };
 		
-		if(Input.GetKey(KeyCode.D)) { transform.Rotate(0,0,-0.3f); };
+		if(Input.GetKey(KeyCode.D)) { transform.Rotate(0,0,-(defaultMotion));  };
     }
 }
