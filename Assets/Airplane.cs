@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Airplane : MonoBehaviour
 {
-	public float thrust   = 10f;
-	public float maxSpeed = 20f;
+	public float thrust   = 30f;
+	public float defaultLift = -0.001f;
 
 	Rigidbody rb;
 	
@@ -18,8 +18,17 @@ public class Airplane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(rb.velocity.magnitude < maxSpeed) {
-			rb.AddRelativeForce(new Vector3(0, 0, thrust));
-		}
+		rb.velocity = transform.forward * thrust;
+		transform.Rotate(defaultLift, 0, 0);
+		
+		// Airplane Controls
+		
+		if(Input.GetKey(KeyCode.W)) { transform.Rotate(0.1f,0,0);  };
+			
+		if(Input.GetKey(KeyCode.S)) { transform.Rotate(-0.1f,0,0);   };
+			
+		if(Input.GetKey(KeyCode.A)) { transform.Rotate(0,0,0.3f);  };
+		
+		if(Input.GetKey(KeyCode.D)) { transform.Rotate(0,0,-0.3f); };
     }
 }
