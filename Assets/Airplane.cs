@@ -25,7 +25,7 @@ public class Airplane : MonoBehaviour
 		
 		if(Input.GetKey(KeyCode.W)) { transform.Rotate(0.1f,0,0);  };
 			
-		if(Input.GetKey(KeyCode.S)) { transform.Rotate(-0.1f,0,0);   };
+		if(Input.GetKey(KeyCode.S)) { transform.Rotate(-0.5f,0,0);   };
 			
 		if(Input.GetKey(KeyCode.A)) { transform.Rotate(0,0,0.3f);  };
 		
