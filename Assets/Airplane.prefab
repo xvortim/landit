@@ -2217,7 +2217,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 98046813379138682}
-  - component: {fileID: 2644762732709876707}
   - component: {fileID: 4286544743791202576}
   m_Layer: 0
   m_Name: Airplane
@@ -2252,20 +2251,6 @@ Transform:
   - {fileID: 395366512278831257}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2644762732709876707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8525055630784411989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b90ec1d746a0b34491ca44967a95fb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thrust: 30
-  defaultLift: -0.001
 --- !u!54 &4286544743791202576
 Rigidbody:
   m_ObjectHideFlags: 0
