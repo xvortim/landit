@@ -53,7 +53,7 @@ public class Airplane : MonoBehaviour
 		rb.AddForce(transform.forward  * thrustMax * throttle);
 		rb.AddTorque(transform.up      * yaw   * responseModifier);
 		rb.AddTorque(transform.right   * pitch * responseModifier);
-		rb.AddTorque(transform.forward * roll  * responseModifier);
+		rb.AddTorque(-transform.forward * roll  * responseModifier);
 		
 	}
 	
