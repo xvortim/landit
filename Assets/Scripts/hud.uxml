@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="hud" text="Let&apos;s fly!&#10;" style="font-size: 18px; -unity-font-style: bold; height: 224px;" />
+    </ui:VisualElement>
+</ui:UXML>
