@@ -304,7 +304,7 @@ Transform:
   m_GameObject: {fileID: 441502935}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 41, z: -3}
+  m_LocalPosition: {x: 0, y: 41, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -327,7 +327,7 @@ MonoBehaviour:
   - {fileID: 833681618}
   - {fileID: 1429059636}
   - {fileID: 2061974888}
-  speed: 25
+  speed: 50
 --- !u!4 &833681618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4725279387592032030, guid: 060dcc39858e12b44822671566bc6506, type: 3}
@@ -514,11 +514,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throttleIncrement: 0.1
-  thrustMax: 200
+  thrustMax: 250
   responsivness: 1
-  roll: 0
-  pitch: 0
-  yaw: 0
+  lift: 300
 --- !u!65 &1794603638
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -580,7 +578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 98046813379138682, guid: 060dcc39858e12b44822671566bc6506, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 40
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 98046813379138682, guid: 060dcc39858e12b44822671566bc6506, type: 3}
       propertyPath: m_LocalPosition.z
@@ -633,6 +631,10 @@ PrefabInstance:
     - target: {fileID: 2913366415050447151, guid: 060dcc39858e12b44822671566bc6506, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286544743791202576, guid: 060dcc39858e12b44822671566bc6506, type: 3}
+      propertyPath: m_Mass
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 4286544743791202576, guid: 060dcc39858e12b44822671566bc6506, type: 3}
       propertyPath: m_UseGravity

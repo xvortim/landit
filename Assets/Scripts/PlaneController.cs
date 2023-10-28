@@ -8,15 +8,17 @@ public class Airplane : MonoBehaviour
 	[Tooltip("Throttle position")]
 	public float throttleIncrement = 0.1f;
 	[Tooltip("Maximum thrust")]
-	public float thrustMax= 200f;
+	public float thrustMax= 300f;
 	[Tooltip("Plane responsivness")]
 	public float responsivness = 1f;
+	[Tooltip("Plane lift")]
+	public float lift = 180f;
 	
 	public static float throttle;
 	public static float altitude;
-	public float roll;
-	public float pitch;
-	public float yaw;
+	private float roll;
+	private float pitch;
+	private float yaw;
 	
 	public static Rigidbody rb;
 	
@@ -25,6 +27,9 @@ public class Airplane : MonoBehaviour
 				return (rb.mass / 10f) * responsivness;
 			}
 	}
+	
+	
+	// [SerializeField] Transform propeller;
 	
 	//---//
 	
@@ -57,6 +62,7 @@ public class Airplane : MonoBehaviour
 	
 	public void Update() {
 		HandleInputs();
+		//propeller.Rotate(Vector3.forward * throttle);
 	}
 	
 	public void FixedUpdate() {
@@ -66,5 +72,6 @@ public class Airplane : MonoBehaviour
 		rb.AddTorque(transform.right   * pitch * responseModifier);
 		rb.AddTorque(-transform.forward * roll  * responseModifier);
 		
+		rb.AddForce(Vector3.up * rb.velocity.magnitude * lift);
 	}
 }
