@@ -6,7 +6,7 @@ public class Airplane : MonoBehaviour
 {
 	[Header("Plane Stats")]
 	[Tooltip("Throttle position")]
-	public float throttleIncrement = 0.1f;
+	public float throttleIncrement = 0.5f;
 	[Tooltip("Maximum thrust")]
 	public float thrustMax= 300f;
 	[Tooltip("Plane responsivness")]
@@ -21,6 +21,7 @@ public class Airplane : MonoBehaviour
 	private float yaw;
 	
 	public static Rigidbody rb;
+	public AudioSource engineSound;
 	
 	public float responseModifier {
 			get {
@@ -29,7 +30,7 @@ public class Airplane : MonoBehaviour
 	}
 	
 	
-	// [SerializeField] Transform propeller;
+	[SerializeField] Transform propeller;
 	
 	//---//
 	
@@ -53,6 +54,7 @@ public class Airplane : MonoBehaviour
 	
 	public void Awake() {
 		rb = GetComponent<Rigidbody>();
+		engineSound = GetComponent<AudioSource>();
 	}
 	
 	public void Start() {
@@ -62,7 +64,8 @@ public class Airplane : MonoBehaviour
 	
 	public void Update() {
 		HandleInputs();
-		//propeller.Rotate(Vector3.forward * throttle);
+		propeller.Rotate(Vector3.forward * throttle);
+		engineSound.volume = throttle * 0.01f;
 	}
 	
 	public void FixedUpdate() {
