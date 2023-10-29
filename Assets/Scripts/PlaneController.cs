@@ -60,11 +60,10 @@ public class Airplane : MonoBehaviour
 		propeller.Rotate(Vector3.forward * throttle);
 		// LeftRoll
 		if(Input.GetKey(KeyCode.A)) {
-			lailleron.transform.Rotate(1f, 0, 0);
-			lailleron.transform.localEulerAngles = new Vector3(Mathf.Clamp(lailleron.transform.localEulerAngles.x, -30, 30), 0, 0);
-			
-			railleron.transform.Rotate(-1f, 0, 0);
-			railleron.transform.localEulerAngles = new Vector3(Mathf.Clamp(railleron.transform.localEulerAngles.x, 30, -30), 0, 0);
+			if(lailleron.transform.localRotation != Quaternion.Euler(30, 0, 0)) {
+				lailleron.transform.Rotate(1f, 0, 0);
+				railleron.transform.Rotate(-1f, 0, 0);
+			}
 		} else {
 			while(lailleron.transform.localRotation.x > 0) {
 				lailleron.transform.Rotate(-1f, 0, 0);
@@ -73,11 +72,10 @@ public class Airplane : MonoBehaviour
 		}
 		// RightRoll
 		if(Input.GetKey(KeyCode.D)) {
-			railleron.transform.Rotate(1f, 0, 0);
-			railleron.transform.localEulerAngles = new Vector3(Mathf.Clamp(railleron.transform.localEulerAngles.x, -30, 30), 0, 0);
-			
-			lailleron.transform.Rotate(-1f, 0, 0);
-			lailleron.transform.localEulerAngles = new Vector3(Mathf.Clamp(lailleron.transform.localEulerAngles.x, 30, -30), 0, 0);
+			if(railleron.transform.localRotation != Quaternion.Euler(30, 0, 0)) {
+				railleron.transform.Rotate(1f, 0, 0);
+				lailleron.transform.Rotate(-1f, 0, 0);
+			}
 		} else {
 			while(railleron.transform.localRotation.x > 0) {
 				railleron.transform.Rotate(-1f, 0, 0);
@@ -87,8 +85,8 @@ public class Airplane : MonoBehaviour
 		
 		// PitchUp
 		if(Input.GetKey(KeyCode.S)) {
-			elevator.transform.localEulerAngles = new Vector3(Mathf.Clamp(elevator.transform.localEulerAngles.x, 0, 30), 0, 0);
-			elevator.transform.Rotate(1f, 0, 0);
+			if(elevator.transform.localRotation != Quaternion.Euler(30, 0, 0))
+				elevator.transform.Rotate(1f, 0, 0);
 		} else {
 			while(elevator.transform.localRotation.x > 0) {
 				elevator.transform.Rotate(-1f, 0, 0);
@@ -96,8 +94,8 @@ public class Airplane : MonoBehaviour
 		}
 		// PitchDown
 		if(Input.GetKey(KeyCode.W)) {
-			elevator.transform.localEulerAngles = new Vector3(Mathf.Clamp(elevator.transform.localEulerAngles.x, 0, -30), 0, 0);
-			elevator.transform.Rotate(-1f, 0, 0);
+			if(elevator.transform.localRotation != Quaternion.Euler(-30, 0, 0))
+				elevator.transform.Rotate(-1f, 0, 0);
 		} else {
 			while(elevator.transform.localRotation.x < 0) {
 				elevator.transform.Rotate(1f, 0, 0);
@@ -106,8 +104,8 @@ public class Airplane : MonoBehaviour
 		
 		// YawRight
 		if(Input.GetKey(KeyCode.Q)) {
-			rudder.transform.Rotate(0, 1f, 0);
-			rudder.transform.localEulerAngles = new Vector3(0, Mathf.Clamp(rudder.transform.localEulerAngles.y, 0, 30), 0);
+			if(rudder.transform.localRotation != Quaternion.Euler(0, 30, 0))
+				rudder.transform.Rotate(0, 1f, 0);
 		} else {
 			while(rudder.transform.localRotation.y > 0) {
 				rudder.transform.Rotate(0, -1f, 0);
@@ -115,8 +113,8 @@ public class Airplane : MonoBehaviour
 		}
 		// YawLeft
 		if(Input.GetKey(KeyCode.E)) {
-			rudder.transform.Rotate(0, -1f, 0);
-			rudder.transform.localEulerAngles = new Vector3(0, Mathf.Clamp(rudder.transform.localEulerAngles.y, 0, -30), 0);
+			if(rudder.transform.localRotation != Quaternion.Euler(0, -30, 0))
+				rudder.transform.Rotate(0, -1f, 0);
 		} else {
 			while(rudder.transform.localRotation.y < 0) {
 				rudder.transform.Rotate(0, 1f, 0);
@@ -126,7 +124,7 @@ public class Airplane : MonoBehaviour
 		// FlapsDown
 		if(Input.GetKey(KeyCode.F)) {
 			if(!flapsCon) {
-				flaps.transform.Rotate(-25f, 0, 0);
+				flaps.transform.Rotate(-15f, 0, 0);
 				flapsCon = true;
 			} 
 		}
@@ -134,7 +132,7 @@ public class Airplane : MonoBehaviour
 		// FlapsUp	
 		if(Input.GetKey(KeyCode.G)) {
 			if(flapsCon) {
-				flaps.transform.Rotate(25f, 0, 0);
+				flaps.transform.Rotate(15f, 0, 0);
 				flapsCon = false;
 			} 
 		}
