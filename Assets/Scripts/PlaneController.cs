@@ -154,7 +154,6 @@ public class Airplane : MonoBehaviour
 		HandleInputs();
 		HandleCommands();
 		
-		
 		// Sound
 		engineSound.volume = throttle * 0.01f;
 	}
@@ -166,12 +165,29 @@ public class Airplane : MonoBehaviour
 		rb.AddTorque(transform.right   * pitch * responseModifier);
 		rb.AddTorque(-transform.forward * roll  * responseModifier);
 		
+		// Flaps out and stall speed
 		if(!flapsCon) {
 			rb.AddForce(Vector3.up * rb.velocity.magnitude * lift);
+			
+			if(rb.velocity.magnitude < 15f && altitude > 10) {
+				rb.AddForce(Vector3.up * rb.velocity.magnitude * lift * -6f);
+				Debug.Log("STALLED!");
+			}
 		} else {
 			rb.AddForce(Vector3.up * rb.velocity.magnitude * lift * 1.3f);
 			rb.AddForce(transform.forward * thrustMax * throttle * -0.3f);
-		}
+			
+			if(rb.velocity.magnitude < 10f && altitude > 10) {
+				rb.AddForce(Vector3.up * rb.velocity.magnitude * lift * -6f);
+				Debug.Log("STALLED!");
+			}
+		};
+		
+		// Too high angle of attack
+		if(rb.transform.localRotation.x < -0.10f) {
+			rb.AddForce(transform.forward * thrustMax * throttle * rb.transform.localRotation.x);
+		};
+	
 		
 		
 	}
