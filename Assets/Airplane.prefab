@@ -133,11 +133,11 @@ Transform:
   m_GameObject: {fileID: 696999323538592429}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19053966, y: -0.009999873, z: -0.711}
-  m_LocalScale: {x: 0.2475473, y: 0.3, z: 0.5155416}
+  m_LocalPosition: {x: 0.19053964, y: -0.009999873, z: -0.21100003}
+  m_LocalScale: {x: 0.24754728, y: 0.3, z: 0.5155416}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1249980246580623002}
+  m_Father: {fileID: 1994542657626084416}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6536604756940685157
 MeshFilter:
@@ -241,11 +241,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.0065000057, z: 0.06688686}
   m_LocalScale: {x: 1.7238599, y: 0.03444, z: 0.20379}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 279949171702736150}
-  - {fileID: 2728696406647458211}
-  - {fileID: 5955777502459601843}
-  - {fileID: 4331715172369996450}
+  m_Children: []
   m_Father: {fileID: 98046813379138682}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8581058833681786826
@@ -503,7 +499,7 @@ GameObject:
   - component: {fileID: 6585305402974544566}
   - component: {fileID: 2206821058813586127}
   m_Layer: 0
-  m_Name: HorizontalStab
+  m_Name: Elevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -608,7 +604,7 @@ GameObject:
   - component: {fileID: 4244196949345294847}
   - component: {fileID: 6356498318663263272}
   m_Layer: 0
-  m_Name: VerticalStab
+  m_Name: Rudder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -834,11 +830,11 @@ Transform:
   m_GameObject: {fileID: 2764470583660651555}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.41066152, y: -0.009999873, z: -0.6468001}
-  m_LocalScale: {x: 0.17536739, y: 0.3, z: 0.38794604}
+  m_LocalPosition: {x: 0.70792294, y: 0.00615561, z: -0.064924546}
+  m_LocalScale: {x: 0.3023088, y: 0.010332, z: 0.07905952}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1249980246580623002}
+  m_Father: {fileID: 98046813379138682}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1939519856750464330
 MeshFilter:
@@ -970,11 +966,11 @@ Transform:
   m_GameObject: {fileID: 3390895278860597228}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.19104145, y: -0.009999873, z: -0.69970006}
-  m_LocalScale: {x: 0.2475473, y: 0.3, z: 0.49408817}
+  m_LocalPosition: {x: -0.19104145, y: -0.009999873, z: -0.19970006}
+  m_LocalScale: {x: 0.24754728, y: 0.3, z: 0.49408817}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1249980246580623002}
+  m_Father: {fileID: 1994542657626084416}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &252937305204305192
 MeshFilter:
@@ -1167,7 +1163,7 @@ GameObject:
   - component: {fileID: 6587442843459227272}
   - component: {fileID: 7590416364020686760}
   m_Layer: 0
-  m_Name: Vertical Tail
+  m_Name: VerticalStab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1607,11 +1603,11 @@ Transform:
   m_GameObject: {fileID: 5527661653213752981}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.41063762, y: -0.009999873, z: -0.6468001}
-  m_LocalScale: {x: 0.1753674, y: 0.3, z: 0.38794607}
+  m_LocalPosition: {x: -0.70788175, y: 0.00615561, z: -0.064924546}
+  m_LocalScale: {x: 0.30230883, y: 0.010332, z: 0.07905953}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1249980246580623002}
+  m_Father: {fileID: 98046813379138682}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5193916069360783028
 MeshFilter:
@@ -1684,6 +1680,39 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.99999994, z: 1}
   m_Center: {x: 0, y: 0.0000038146973, z: 0}
+--- !u!1 &6513414217097499514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1994542657626084416}
+  m_Layer: 0
+  m_Name: Flaps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1994542657626084416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513414217097499514}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0065000057, z: -0.03500814}
+  m_LocalScale: {x: 1.7238599, y: 0.03444, z: 0.20379}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2728696406647458211}
+  - {fileID: 5955777502459601843}
+  m_Father: {fileID: 98046813379138682}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6935827046413880118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1802,7 +1831,7 @@ GameObject:
   - component: {fileID: 3517256705241719068}
   - component: {fileID: 8911617692881980833}
   m_Layer: 0
-  m_Name: Horizontal Tail
+  m_Name: HorizontalStab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2308,6 +2337,9 @@ Transform:
   - {fileID: 5006967963763202272}
   - {fileID: 5990618276499516645}
   - {fileID: 1249980246580623002}
+  - {fileID: 279949171702736150}
+  - {fileID: 4331715172369996450}
+  - {fileID: 1994542657626084416}
   - {fileID: 7470253422823185412}
   - {fileID: 2324488360407049757}
   - {fileID: 7246548100773301845}

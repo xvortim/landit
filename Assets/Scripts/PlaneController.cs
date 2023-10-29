@@ -29,8 +29,12 @@ public class Airplane : MonoBehaviour
 			}
 	}
 	
-	
 	[SerializeField] Transform propeller;
+	[SerializeField] Transform lailleron;
+	[SerializeField] Transform railleron;
+	[SerializeField] Transform flaps;
+	[SerializeField] Transform elevator;
+	[SerializeField] Transform rudder;
 	
 	//---//
 	
@@ -59,12 +63,41 @@ public class Airplane : MonoBehaviour
 	
 	public void Start() {
 		throttle = 100f;
-		rb.velocity = new Vector3(0.0f, 0.0f, 20f);
+		rb.velocity = new Vector3(0.0f, 0.0f, 50f);
 	}
 	
 	public void Update() {
 		HandleInputs();
+		
+		// Animations
 		propeller.Rotate(Vector3.forward * throttle);
+		// Left
+		if(Input.GetKey(KeyCode.A)) {
+			//if(lailleron.transform.eulerAngles.x < 30) {
+				lailleron.transform.Rotate(3f, 0, 0);
+				railleron.transform.Rotate(-3f, 0, 0);
+			//}			
+		} else {
+			if(lailleron.transform.localRotation.x > 0) {
+				lailleron.transform.Rotate(-3f, 0, 0);
+				railleron.transform.Rotate(3f, 0, 0);
+			}
+		}
+		
+		// Right
+		if(Input.GetKey(KeyCode.D)) {
+			//if(railleron.transform.eulerAngles.x < 30) {
+				lailleron.transform.Rotate(-3f, 0, 0);
+				railleron.transform.Rotate(3f, 0, 0);
+			//}			
+		} else {
+			if(lailleron.transform.localRotation.x > 0) {
+				lailleron.transform.Rotate(3f, 0, 0);
+				railleron.transform.Rotate(-3f, 0, 0);
+			}
+		}
+		
+		// Sound
 		engineSound.volume = throttle * 0.01f;
 	}
 	
