@@ -14,6 +14,7 @@ public class Airplane : MonoBehaviour
 	[Tooltip("Plane lift")]
 	public float lift = 180f;
 	
+	public bool flapsCon = false;
 	public static float throttle;
 	public static float altitude;
 	private float roll;
@@ -53,6 +54,91 @@ public class Airplane : MonoBehaviour
 		throttle = Mathf.Clamp(throttle, 0f, 100f);
 		altitude = rb.transform.position.y;
 	}
+	
+	public void HandleCommands() {
+		// Animations
+		propeller.Rotate(Vector3.forward * throttle);
+		// LeftRoll
+		if(Input.GetKey(KeyCode.A)) {
+			lailleron.transform.Rotate(1f, 0, 0);
+			lailleron.transform.localEulerAngles = new Vector3(Mathf.Clamp(lailleron.transform.localEulerAngles.x, -30, 30), 0, 0);
+			
+			railleron.transform.Rotate(-1f, 0, 0);
+			railleron.transform.localEulerAngles = new Vector3(Mathf.Clamp(railleron.transform.localEulerAngles.x, 30, -30), 0, 0);
+		} else {
+			while(lailleron.transform.localRotation.x > 0) {
+				lailleron.transform.Rotate(-1f, 0, 0);
+				railleron.transform.Rotate(1f, 0, 0);
+			}
+		}
+		// RightRoll
+		if(Input.GetKey(KeyCode.D)) {
+			railleron.transform.Rotate(1f, 0, 0);
+			railleron.transform.localEulerAngles = new Vector3(Mathf.Clamp(railleron.transform.localEulerAngles.x, -30, 30), 0, 0);
+			
+			lailleron.transform.Rotate(-1f, 0, 0);
+			lailleron.transform.localEulerAngles = new Vector3(Mathf.Clamp(lailleron.transform.localEulerAngles.x, 30, -30), 0, 0);
+		} else {
+			while(railleron.transform.localRotation.x > 0) {
+				railleron.transform.Rotate(-1f, 0, 0);
+				lailleron.transform.Rotate(1f, 0, 0);
+			}
+		}
+		
+		// PitchUp
+		if(Input.GetKey(KeyCode.S)) {
+			elevator.transform.localEulerAngles = new Vector3(Mathf.Clamp(elevator.transform.localEulerAngles.x, 0, 30), 0, 0);
+			elevator.transform.Rotate(1f, 0, 0);
+		} else {
+			while(elevator.transform.localRotation.x > 0) {
+				elevator.transform.Rotate(-1f, 0, 0);
+			}
+		}
+		// PitchDown
+		if(Input.GetKey(KeyCode.W)) {
+			elevator.transform.localEulerAngles = new Vector3(Mathf.Clamp(elevator.transform.localEulerAngles.x, 0, -30), 0, 0);
+			elevator.transform.Rotate(-1f, 0, 0);
+		} else {
+			while(elevator.transform.localRotation.x < 0) {
+				elevator.transform.Rotate(1f, 0, 0);
+			}
+		}
+		
+		// YawRight
+		if(Input.GetKey(KeyCode.Q)) {
+			rudder.transform.Rotate(0, 1f, 0);
+			rudder.transform.localEulerAngles = new Vector3(0, Mathf.Clamp(rudder.transform.localEulerAngles.y, 0, 30), 0);
+		} else {
+			while(rudder.transform.localRotation.y > 0) {
+				rudder.transform.Rotate(0, -1f, 0);
+			}
+		}
+		// YawLeft
+		if(Input.GetKey(KeyCode.E)) {
+			rudder.transform.Rotate(0, -1f, 0);
+			rudder.transform.localEulerAngles = new Vector3(0, Mathf.Clamp(rudder.transform.localEulerAngles.y, 0, -30), 0);
+		} else {
+			while(rudder.transform.localRotation.y < 0) {
+				rudder.transform.Rotate(0, 1f, 0);
+			}
+		}
+		
+		// FlapsDown
+		if(Input.GetKey(KeyCode.F)) {
+			if(!flapsCon) {
+				flaps.transform.Rotate(-25f, 0, 0);
+				flapsCon = true;
+			} 
+		}
+
+		// FlapsUp	
+		if(Input.GetKey(KeyCode.G)) {
+			if(flapsCon) {
+				flaps.transform.Rotate(25f, 0, 0);
+				flapsCon = false;
+			} 
+		}
+	}
 		
 	//---//
 	
@@ -62,40 +148,14 @@ public class Airplane : MonoBehaviour
 	}
 	
 	public void Start() {
-		throttle = 100f;
-		rb.velocity = new Vector3(0.0f, 0.0f, 50f);
+		// throttle = 100f;
+		// rb.velocity = new Vector3(0.0f, 0.0f, 30f);
 	}
 	
 	public void Update() {
 		HandleInputs();
+		HandleCommands();
 		
-		// Animations
-		propeller.Rotate(Vector3.forward * throttle);
-		// Left
-		if(Input.GetKey(KeyCode.A)) {
-			//if(lailleron.transform.eulerAngles.x < 30) {
-				lailleron.transform.Rotate(3f, 0, 0);
-				railleron.transform.Rotate(-3f, 0, 0);
-			//}			
-		} else {
-			if(lailleron.transform.localRotation.x > 0) {
-				lailleron.transform.Rotate(-3f, 0, 0);
-				railleron.transform.Rotate(3f, 0, 0);
-			}
-		}
-		
-		// Right
-		if(Input.GetKey(KeyCode.D)) {
-			//if(railleron.transform.eulerAngles.x < 30) {
-				lailleron.transform.Rotate(-3f, 0, 0);
-				railleron.transform.Rotate(3f, 0, 0);
-			//}			
-		} else {
-			if(lailleron.transform.localRotation.x > 0) {
-				lailleron.transform.Rotate(3f, 0, 0);
-				railleron.transform.Rotate(-3f, 0, 0);
-			}
-		}
 		
 		// Sound
 		engineSound.volume = throttle * 0.01f;
@@ -108,6 +168,13 @@ public class Airplane : MonoBehaviour
 		rb.AddTorque(transform.right   * pitch * responseModifier);
 		rb.AddTorque(-transform.forward * roll  * responseModifier);
 		
-		rb.AddForce(Vector3.up * rb.velocity.magnitude * lift);
+		if(!flapsCon) {
+			rb.AddForce(Vector3.up * rb.velocity.magnitude * lift);
+		} else {
+			rb.AddForce(Vector3.up * rb.velocity.magnitude * lift * 1.3f);
+			rb.AddForce(transform.forward * thrustMax * throttle * -0.3f);
+		}
+		
+		
 	}
 }

@@ -537,6 +537,7 @@ MonoBehaviour:
   thrustMax: 250
   responsivness: 2
   lift: 300
+  flapsCon: 0
   engineSound: {fileID: 0}
   propeller: {fileID: 199400835}
   lailleron: {fileID: 1847177714}
@@ -716,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 98046813379138682, guid: 060dcc39858e12b44822671566bc6506, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 40.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 98046813379138682, guid: 060dcc39858e12b44822671566bc6506, type: 3}
       propertyPath: m_LocalPosition.z
@@ -754,6 +755,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 697261334820236730, guid: 060dcc39858e12b44822671566bc6506, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c86fda6f7aa8cce4d800a57f02d99491, type: 2}
     - target: {fileID: 730326513057096371, guid: 060dcc39858e12b44822671566bc6506, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.15
@@ -770,6 +775,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 4015528421228068646, guid: 060dcc39858e12b44822671566bc6506, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bc45b7530ee757047a7423b6926e3960, type: 2}
+    - target: {fileID: 4244196949345294847, guid: 060dcc39858e12b44822671566bc6506, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bc45b7530ee757047a7423b6926e3960, type: 2}
     - target: {fileID: 4286544743791202576, guid: 060dcc39858e12b44822671566bc6506, type: 3}
       propertyPath: m_Mass
       value: 850
@@ -806,6 +819,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 6162423517916257810, guid: 060dcc39858e12b44822671566bc6506, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bc45b7530ee757047a7423b6926e3960, type: 2}
+    - target: {fileID: 6585305402974544566, guid: 060dcc39858e12b44822671566bc6506, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bc45b7530ee757047a7423b6926e3960, type: 2}
     - target: {fileID: 7246548100773301845, guid: 060dcc39858e12b44822671566bc6506, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.04
@@ -826,6 +847,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Airplane
       objectReference: {fileID: 0}
+    - target: {fileID: 8685751383860714436, guid: 060dcc39858e12b44822671566bc6506, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c86fda6f7aa8cce4d800a57f02d99491, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4452592196390353796, guid: 060dcc39858e12b44822671566bc6506, type: 3}
