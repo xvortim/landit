@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Airplane : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Airplane : MonoBehaviour
 	public float responsivness = 1f;
 	[Tooltip("Plane lift")]
 	public float lift = 180f;
+	[Tooltip("Starting speed")]
+	public float start = 30f;
 	
 	public bool flapsCon = false;
 	public static float throttle;
@@ -53,6 +56,13 @@ public class Airplane : MonoBehaviour
 		
 		throttle = Mathf.Clamp(throttle, 0f, 100f);
 		altitude = rb.transform.position.y;
+		
+		if(Input.GetKey(KeyCode.M))
+			SceneManager.LoadSceneAsync(0);
+		
+		if(Input.GetKey(KeyCode.R))
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			
 	}
 	
 	public void HandleCommands() {
@@ -146,8 +156,8 @@ public class Airplane : MonoBehaviour
 	}
 	
 	public void Start() {
-		// throttle = 100f;
-		// rb.velocity = new Vector3(0.0f, 0.0f, 30f);
+		throttle = start*3;
+		rb.velocity = new Vector3(0.0f, 0.0f, start);
 	}
 	
 	public void Update() {

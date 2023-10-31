@@ -537,6 +537,7 @@ MonoBehaviour:
   thrustMax: 250
   responsivness: 2
   lift: 300
+  start: 0
   flapsCon: 0
   engineSound: {fileID: 0}
   propeller: {fileID: 199400835}
