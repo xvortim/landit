@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 900537dec7577e248abe766341c7ed85
   - enabled: 1
-    path: Assets/Scenes/Land.unity
+    path: Assets/Scenes/EnjoyIT.unity
     guid: e5a72296c81ec8f4db64b74541752e77
   - enabled: 1
-    path: Assets/Scenes/Fly.unity
+    path: Assets/Scenes/LandIT.unity
     guid: fb114b6eaa268354f8140b5a01236a56
   m_configObjects: {}
