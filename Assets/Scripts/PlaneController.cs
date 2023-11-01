@@ -17,7 +17,7 @@ public class Airplane : MonoBehaviour
 	[Tooltip("Starting speed")]
 	public float start = 30f;
 	
-	public bool flapsCon = false;
+	private bool flapsCon = false;
 	public static float throttle;
 	public static float altitude;
 	private float roll;
@@ -25,7 +25,9 @@ public class Airplane : MonoBehaviour
 	private float yaw;
 	
 	public static Rigidbody rb;
+	
 	public AudioSource engineSound;
+	public AudioSource sirenSound;
 	
 	public float responseModifier {
 			get {
@@ -152,7 +154,6 @@ public class Airplane : MonoBehaviour
 	
 	public void Awake() {
 		rb = GetComponent<Rigidbody>();
-		engineSound = GetComponent<AudioSource>();
 	}
 	
 	public void Start() {
@@ -166,6 +167,13 @@ public class Airplane : MonoBehaviour
 		
 		// Sound
 		engineSound.volume = throttle * 0.01f;
+		
+		if(altitude > 5f) {
+			if(!flapsCon)
+				sirenSound.volume  = -(rb.velocity.magnitude - 20f) * 0.05f; 
+			else
+				sirenSound.volume  = -(rb.velocity.magnitude - 15f) * 0.05f; 
+		}
 	}
 	
 	public void FixedUpdate() {
@@ -181,7 +189,6 @@ public class Airplane : MonoBehaviour
 			
 			if(rb.velocity.magnitude < 15f && altitude > 10) {
 				rb.AddForce(Vector3.up * rb.velocity.magnitude * lift * -6f);
-				Debug.Log("STALLED!");
 			}
 		} else {
 			rb.AddForce(Vector3.up * rb.velocity.magnitude * lift * 1.3f);
@@ -189,15 +196,12 @@ public class Airplane : MonoBehaviour
 			
 			if(rb.velocity.magnitude < 10f && altitude > 10) {
 				rb.AddForce(Vector3.up * rb.velocity.magnitude * lift * -6f);
-				Debug.Log("STALLED!");
 			}
 		};
 		
 		// Too high angle of attack
 		if(rb.transform.localRotation.x < -0.20f) {
 			rb.AddForce(transform.forward * thrustMax * throttle * rb.transform.localRotation.x);
-		} else if(rb.transform.localRotation.x > 0.20f) {
-			rb.AddForce(transform.forward * thrustMax * throttle * -rb.transform.localRotation.x);
 		}
 	}
 }
