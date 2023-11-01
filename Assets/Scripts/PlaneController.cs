@@ -194,11 +194,10 @@ public class Airplane : MonoBehaviour
 		};
 		
 		// Too high angle of attack
-		if(rb.transform.localRotation.x < -0.10f) {
+		if(rb.transform.localRotation.x < -0.20f) {
 			rb.AddForce(transform.forward * thrustMax * throttle * rb.transform.localRotation.x);
-		};
-	
-		
-		
+		} else if(rb.transform.localRotation.x > 0.20f) {
+			rb.AddForce(transform.forward * thrustMax * throttle * -rb.transform.localRotation.x);
+		}
 	}
 }
