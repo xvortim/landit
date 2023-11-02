@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; height: 606px;">
-        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="hud" text="Let&apos;s fly!&#10;" style="font-size: 18px; -unity-font-style: bold; height: 452px; transform-origin: left top; width: 323px; position: absolute; left: 3px; top: 5px;" />
-        <ui:Label tabindex="-1" text="Press H to show commands&#10;Press X to remove this screen&#10;Press R to restart, M to menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="help" style="height: 15%; -unity-text-align: upper-left; transform-origin: left bottom; width: 15%; position: absolute; top: 1%; left: auto; right: 0; justify-content: flex-start;" />
+        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="hud" text="Parameters&#10;" style="font-size: 18px; -unity-font-style: bold; height: 452px; transform-origin: left top; width: 323px; position: absolute; left: 3px; top: 5px;" />
+        <ui:Label tabindex="-1" text="Press H to show commands&#10;Press X to remove this screen&#10;Press R to restart, M to menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="help" style="height: 15%; -unity-text-align: upper-left; transform-origin: left bottom; width: 15%; position: absolute; top: 1%; left: auto; right: -1%; justify-content: flex-start;" />
+        <ui:Label tabindex="-1" text="Heading&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="compass" style="position: absolute; top: 95%; left: 45%; width: 10%; -unity-text-align: upper-center; font-size: 20px; -unity-font-style: bold;" />
     </ui:VisualElement>
 </ui:UXML>
