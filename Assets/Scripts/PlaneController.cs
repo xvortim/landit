@@ -53,7 +53,7 @@ public class Airplane : MonoBehaviour
 		// Set throttle behaviour
 		if(Input.GetKey(KeyCode.Space)) 
 			throttle += throttleIncrement;
-		else if(Input.GetKey(KeyCode.LeftControl))
+		else if(Input.GetKey(KeyCode.LeftShift))
 			throttle -= throttleIncrement;
 		
 		throttle = Mathf.Clamp(throttle, 0f, 100f);
