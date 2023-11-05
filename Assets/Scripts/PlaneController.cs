@@ -17,15 +17,17 @@ public class Airplane : MonoBehaviour
 	[Tooltip("Starting speed")]
 	public float start = 30f;
 	
-	private bool flapsCon = false;
-	public static float throttle;
-	public static float altitude;
 	private float roll;
 	private float pitch;
 	private float yaw;
+	private bool flapsCon = false;
 	
+	// Passed to hudUpdate.cs
+	public static float throttle;
+	public static float altitude;
 	public static Rigidbody rb;
 	
+	// Audio
 	public AudioSource engineSound;
 	public AudioSource sirenSound;
 	
@@ -46,7 +48,7 @@ public class Airplane : MonoBehaviour
 	
 	public void HandleInputs() {
 		// Set rotation from axis inputs
-		roll = Input.GetAxis("Roll");
+		roll  = Input.GetAxis("Roll");
 		pitch = Input.GetAxis("Pitch");
 		yaw = Input.GetAxis("Yaw");
 		
