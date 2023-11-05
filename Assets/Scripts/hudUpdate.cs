@@ -4,20 +4,32 @@ using UnityEngine.SceneManagement;
 
 public class hudUpdater : MonoBehaviour
 {
-    public Label labelElement;
+	public static float buttonRoll;
+	public static float buttonPitch;
+	public static float buttonYaw;
+	public static float sliderValue;
+	public static bool  mobileOn = false;
+	
+	public Label labelElement;
 	public Label helpElement;
 	public Label compassElement;
+	
 	public Button pitchupElement;
 	public Button pitchdownElement;
 	public Button rollleftElement;
 	public Button rollrightElement;
 	public Button yawleftElement;
 	public Button yawrightElement;
+	public Button flapsElement;
+	
 	public Button restartElement;
 	public Button menuElement;
+	
 	public SliderInt throttleElement;
-
-    public void Start()
+	
+	private bool click = false;
+	
+	public void Start()
     {
 		VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 		
@@ -30,8 +42,10 @@ public class hudUpdater : MonoBehaviour
 		rollrightElement = root.Q<Button>("rollright");
 		yawleftElement   = root.Q<Button>("yawleft");
 		yawrightElement  = root.Q<Button>("yawright");
+		flapsElement     = root.Q<Button>("flaps");
 		restartElement   = root.Q<Button>("restart");
 		menuElement      = root.Q<Button>("menu");
+		
 		throttleElement  = root.Q<SliderInt>("throttle");
 	}
 	
@@ -47,7 +61,7 @@ public class hudUpdater : MonoBehaviour
 		compassElement.text = (Airplane.rb.transform.eulerAngles.y).ToString("F0") + '°';
 		
 		//Buttons
-		if(Input.GetKeyDown(KeyCode.B)) {
+		if(!mobileOn) {
 			pitchupElement.style.display = DisplayStyle.None;
 			pitchdownElement.style.display = DisplayStyle.None;
 			rollleftElement.style.display = DisplayStyle.None;
@@ -57,17 +71,41 @@ public class hudUpdater : MonoBehaviour
 			restartElement.style.display = DisplayStyle.None;
 			menuElement.style.display = DisplayStyle.None;
 			throttleElement.style.display = DisplayStyle.None;
+			flapsElement.style.display    = DisplayStyle.None;
+		} else {
+			helpElement.text =  "";
 		}
 		
-		menuElement.clicked       += () => SceneManager.LoadSceneAsync(0);
-		restartElement.clicked    += () => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		pitchdownElement.clicked  += () => buttonPitch =  1.0f;
+		pitchupElement.clicked    += () => buttonPitch = -1.0f;
+		rollrightElement.clicked  += () => buttonRoll  =  1.0f;
+		rollleftElement.clicked   += () => buttonRoll  = -1.0f;
+		yawrightElement.clicked   += () => buttonYaw   =  1.0f;
+		yawleftElement.clicked    += () => buttonYaw   = -1.0f;
+		flapsElement.clicked      += () => Airplane.flapsCon = !Airplane.flapsCon;
 		
-		pitchupElement.clicked    += () =>
-		pitchdownElement.clicked  += () =>
-		rollrightElement.clicked  += () =>
-		rollleftElement.clicked   += () =>
-		yawrightElement.clicked   += () =>
-		yawleftElement.clicked    += () =>
+		menuElement.clicked     += () => GoToMenu();
+		restartElement.clicked  += () => PlayGameCurrent();
+		
+		sliderValue = throttleElement.value;
+	}
+	
+	public void PlayGameCurrent() {
+		click = true;
+		if(click) 
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		else
+			return;
+		click = false;
+	}
+	
+	public void GoToMenu() {
+		click = true;
+		if(click)
+			SceneManager.LoadSceneAsync(0);
+		else
+			return;
+		click = false;
 	}
 }
 

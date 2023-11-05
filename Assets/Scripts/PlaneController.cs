@@ -20,12 +20,12 @@ public class Airplane : MonoBehaviour
 	private float roll;
 	private float pitch;
 	private float yaw;
-	private bool flapsCon = false;
 	
 	// Passed to hudUpdate.cs
 	public static float throttle;
 	public static float altitude;
 	public static Rigidbody rb;
+	public static bool flapsCon = false;
 	
 	// Audio
 	public AudioSource engineSound;
@@ -52,15 +52,20 @@ public class Airplane : MonoBehaviour
 		pitch = Input.GetAxis("Pitch");
 		yaw   = Input.GetAxis("Yaw");
 		
-		//roll  += buttonRoll;
-		//pitch += buttonPitch;
-		//yaw   += buttonYaw;
+		roll  += hudUpdater.buttonRoll;
+		pitch += hudUpdater.buttonPitch;
+		yaw   += hudUpdater.buttonYaw;
 		
 		// Set throttle behaviour
-		if(Input.GetKey(KeyCode.Space)) 
-			throttle += throttleIncrement;
-		else if(Input.GetKey(KeyCode.LeftShift))
-			throttle -= throttleIncrement;
+		if(hudUpdater.mobileOn) {
+			throttle = hudUpdater.sliderValue;
+		} else {
+			if(Input.GetKey(KeyCode.Space)) {
+				throttle += throttleIncrement;
+			} else if(Input.GetKey(KeyCode.LeftShift)) {
+				throttle -= throttleIncrement;
+			}
+		}
 		
 		throttle = Mathf.Clamp(throttle, 0f, 100f);
 		altitude = rb.transform.position.y;
@@ -164,6 +169,7 @@ public class Airplane : MonoBehaviour
 	
 	public void Start() {
 		throttle = start*3;
+		hudUpdater.sliderValue = throttle;
 		rb.velocity = new Vector3(0.0f, 0.0f, start);
 	}
 	
