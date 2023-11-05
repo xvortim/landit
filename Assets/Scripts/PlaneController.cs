@@ -50,7 +50,11 @@ public class Airplane : MonoBehaviour
 		// Set rotation from axis inputs
 		roll  = Input.GetAxis("Roll");
 		pitch = Input.GetAxis("Pitch");
-		yaw = Input.GetAxis("Yaw");
+		yaw   = Input.GetAxis("Yaw");
+		
+		//roll  += buttonRoll;
+		//pitch += buttonPitch;
+		//yaw   += buttonYaw;
 		
 		// Set throttle behaviour
 		if(Input.GetKey(KeyCode.Space)) 

@@ -1,20 +1,42 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class hudUpdater : MonoBehaviour
 {
     public Label labelElement;
 	public Label helpElement;
 	public Label compassElement;
+	public Button pitchupElement;
+	public Button pitchdownElement;
+	public Button rollleftElement;
+	public Button rollrightElement;
+	public Button yawleftElement;
+	public Button yawrightElement;
+	public Button restartElement;
+	public Button menuElement;
+	public SliderInt throttleElement;
 
     public void Start()
     {
-		labelElement   = GetComponent<UIDocument>().rootVisualElement.Q<Label>("hud");
-		helpElement    = GetComponent<UIDocument>().rootVisualElement.Q<Label>("help");
-		compassElement = GetComponent<UIDocument>().rootVisualElement.Q<Label>("compass");
-    }
+		VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+		
+		labelElement     = root.Q<Label>("hud");
+		helpElement      = root.Q<Label>("help");
+		compassElement   = root.Q<Label>("compass");
+		pitchupElement   = root.Q<Button>("pitchup");
+		pitchdownElement = root.Q<Button>("pitchdown");
+		rollleftElement  = root.Q<Button>("rollleft");
+		rollrightElement = root.Q<Button>("rollright");
+		yawleftElement   = root.Q<Button>("yawleft");
+		yawrightElement  = root.Q<Button>("yawright");
+		restartElement   = root.Q<Button>("restart");
+		menuElement      = root.Q<Button>("menu");
+		throttleElement  = root.Q<SliderInt>("throttle");
+	}
 	
 	public void Update() {
+		// HUD
 		labelElement.text =  "Throttle: " + Airplane.throttle.ToString("F0") + "%\n" + "Airspeed: " + (Airplane.rb.velocity.magnitude*3).ToString("F0") 
 										  + "kn\n" + "Altitude: " + (Airplane.altitude*4).ToString("F0") +  "ft\n";
 		if(Input.GetKeyDown(KeyCode.H))
@@ -23,6 +45,29 @@ public class hudUpdater : MonoBehaviour
 			helpElement.text =  "" ;
 
 		compassElement.text = (Airplane.rb.transform.eulerAngles.y).ToString("F0") + '°';
+		
+		//Buttons
+		if(Input.GetKeyDown(KeyCode.B)) {
+			pitchupElement.style.display = DisplayStyle.None;
+			pitchdownElement.style.display = DisplayStyle.None;
+			rollleftElement.style.display = DisplayStyle.None;
+			rollrightElement.style.display = DisplayStyle.None;
+			yawleftElement.style.display = DisplayStyle.None;
+			yawrightElement.style.display = DisplayStyle.None;
+			restartElement.style.display = DisplayStyle.None;
+			menuElement.style.display = DisplayStyle.None;
+			throttleElement.style.display = DisplayStyle.None;
+		}
+		
+		menuElement.clicked       += () => SceneManager.LoadSceneAsync(0);
+		restartElement.clicked    += () => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		
+		pitchupElement.clicked    += () =>
+		pitchdownElement.clicked  += () =>
+		rollrightElement.clicked  += () =>
+		rollleftElement.clicked   += () =>
+		yawrightElement.clicked   += () =>
+		yawleftElement.clicked    += () =>
 	}
 }
 
