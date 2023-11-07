@@ -183,11 +183,15 @@ public class Airplane : MonoBehaviour
 		else
 			engineSound.volume = 0f;
 		
-		if(altitude > 5f) {
-			if(!flapsCon)
-				sirenSound.volume  = -(rb.velocity.magnitude - 20f) * 0.05f; 
-			else
-				sirenSound.volume  = -(rb.velocity.magnitude - 15f) * 0.05f; 
+		if(menuScript.soundOn) {
+			if(altitude > 5f) {
+				if(!flapsCon)
+					sirenSound.volume  = -(rb.velocity.magnitude - 20f) * 0.05f; 
+				else
+					sirenSound.volume  = -(rb.velocity.magnitude - 15f) * 0.05f; 
+			}
+		} else {
+			sirenSound.volume = 0.00f;
 		}
 	}
 	
