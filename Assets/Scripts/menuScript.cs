@@ -6,36 +6,26 @@ using UnityEngine.UIElements;
 
 public class menuScript : MonoBehaviour
 {
+	public static bool mobileOn = false;
+	public static bool soundOn  = true;
+	
 	public void OnEnable() {
 		VisualElement root = GetComponent<UIDocument>().rootVisualElement;
-		
 		Button fly    = root.Q<Button>("fly");
-		Button land   = root.Q<Button>("land");
+	    Button land   = root.Q<Button>("land");
 		Button exit   = root.Q<Button>("exit");
-		Button mobile = root.Q<Button>("mobile");
 		
-		fly.clicked    += () => PlayGameFly();
-		land.clicked   += () => PlayGameLand();
+		fly.clicked    += () => SceneManager.LoadSceneAsync(1);
+		land.clicked   += () => SceneManager.LoadSceneAsync(2);
 		exit.clicked   += () => Application.Quit();
-		mobile.clicked += () => MobileMode();
 	}
 	
-	public void PlayGameFly() {
-		SceneManager.LoadSceneAsync(1);
-	}
-	
-	public void PlayGameLand() {
-		SceneManager.LoadSceneAsync(2);
-	}
-	
-	public void MobileMode() {
-		hudUpdater.mobileOn = !hudUpdater.mobileOn;
-		var style = GetComponent<UIDocument>().rootVisualElement.Q<Button>("mobile")?.style;
+	public void Update() {
+		VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+		Toggle mobile = root.Q<Toggle>("mobile");
+		Toggle sound  = root.Q<Toggle>("sound");
 		
-		if(hudUpdater.mobileOn)
-			style.backgroundColor = new StyleColor(Color.green);
-		else
-			style.backgroundColor = new StyleColor(Color.red);
+		mobileOn = mobile.value;
+	    soundOn  = sound.value;	
 	}
-
 }

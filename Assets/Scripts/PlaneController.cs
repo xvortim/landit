@@ -57,7 +57,7 @@ public class Airplane : MonoBehaviour
 		yaw   += hudUpdater.buttonYaw;
 		
 		// Set throttle behaviour
-		if(hudUpdater.mobileOn) {
+		if(menuScript.mobileOn) {
 			throttle = hudUpdater.sliderValue;
 		} else {
 			if(Input.GetKey(KeyCode.Space)) {
@@ -178,7 +178,10 @@ public class Airplane : MonoBehaviour
 		HandleCommands();
 		
 		// Sound
-		engineSound.volume = throttle * 0.01f;
+		if(menuScript.soundOn)
+			engineSound.volume = throttle * 0.01f;
+		else
+			engineSound.volume = 0f;
 		
 		if(altitude > 5f) {
 			if(!flapsCon)

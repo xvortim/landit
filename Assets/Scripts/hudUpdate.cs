@@ -8,7 +8,6 @@ public class hudUpdater : MonoBehaviour
 	public static float buttonPitch;
 	public static float buttonYaw;
 	public static float sliderValue;
-	public static bool  mobileOn = false;
 	
 	public Label labelElement;
 	public Label helpElement;
@@ -43,13 +42,12 @@ public class hudUpdater : MonoBehaviour
 		yawleftElement   = root.Q<Button>("yawleft");
 		yawrightElement  = root.Q<Button>("yawright");
 		flapsElement     = root.Q<Button>("flaps");
-		restartElement   = root.Q<Button>("restart");
-		menuElement      = root.Q<Button>("menu");
-		
+				
 		throttleElement  = root.Q<SliderInt>("throttle");
 	}
 	
-	public void Update() {
+	public void Update() 
+	{
 		// HUD
 		labelElement.text =  "Throttle: " + Airplane.throttle.ToString("F0") + "%\n" + "Airspeed: " + (Airplane.rb.velocity.magnitude*3).ToString("F0") 
 										  + "kn\n" + "Altitude: " + (Airplane.altitude*4).ToString("F0") +  "ft\n";
@@ -61,7 +59,7 @@ public class hudUpdater : MonoBehaviour
 		compassElement.text = (Airplane.rb.transform.eulerAngles.y).ToString("F0") + '°';
 		
 		//Buttons
-		if(!mobileOn) {
+		if(!menuScript.mobileOn) {
 			pitchupElement.style.display = DisplayStyle.None;
 			pitchdownElement.style.display = DisplayStyle.None;
 			rollleftElement.style.display = DisplayStyle.None;
@@ -84,28 +82,16 @@ public class hudUpdater : MonoBehaviour
 		yawleftElement.clicked    += () => buttonYaw   = -1.0f;
 		flapsElement.clicked      += () => Airplane.flapsCon = !Airplane.flapsCon;
 		
-		menuElement.clicked     += () => GoToMenu();
-		restartElement.clicked  += () => PlayGameCurrent();
-		
 		sliderValue = throttleElement.value;
 	}
 	
-	public void PlayGameCurrent() {
-		click = true;
-		if(click) 
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-		else
-			return;
-		click = false;
-	}
-	
-	public void GoToMenu() {
-		click = true;
-		if(click)
-			SceneManager.LoadSceneAsync(0);
-		else
-			return;
-		click = false;
+	public void OnEnable() 
+	{
+		VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+		restartElement   = root.Q<Button>("restart");
+		menuElement      = root.Q<Button>("menu");
+		
+		menuElement.clicked     += () => SceneManager.LoadSceneAsync(0);
+		restartElement.clicked  += () => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 }
-
