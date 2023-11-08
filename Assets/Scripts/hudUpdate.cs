@@ -12,7 +12,6 @@ public class hudUpdater : MonoBehaviour
 	public Label labelElement;
 	public Label helpElement;
 	public Label compassElement;
-	
 	public Button pitchupElement;
 	public Button pitchdownElement;
 	public Button rollleftElement;
@@ -20,13 +19,10 @@ public class hudUpdater : MonoBehaviour
 	public Button yawleftElement;
 	public Button yawrightElement;
 	public Button flapsElement;
-	
 	public Button restartElement;
 	public Button menuElement;
-	
 	public SliderInt throttleElement;
 	
-	private bool click = false;
 	
 	public void Start()
     {
@@ -42,7 +38,6 @@ public class hudUpdater : MonoBehaviour
 		yawleftElement   = root.Q<Button>("yawleft");
 		yawrightElement  = root.Q<Button>("yawright");
 		flapsElement     = root.Q<Button>("flaps");
-				
 		throttleElement  = root.Q<SliderInt>("throttle");
 	}
 	

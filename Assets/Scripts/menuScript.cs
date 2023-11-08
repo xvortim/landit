@@ -20,6 +20,12 @@ public class menuScript : MonoBehaviour
 		exit.clicked   += () => Application.Quit();
 	}
 	
+	public void Start() {
+		hudUpdater.buttonRoll   = 0f;
+		hudUpdater.buttonPitch  = 0f;
+		hudUpdater.buttonYaw    = 0f;
+ 	}
+	
 	public void Update() {
 		VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 		Toggle mobile = root.Q<Toggle>("mobile");
