@@ -39,6 +39,10 @@ public class hudUpdater : MonoBehaviour
 		yawrightElement  = root.Q<Button>("yawright");
 		flapsElement     = root.Q<Button>("flaps");
 		throttleElement  = root.Q<SliderInt>("throttle");
+		
+		buttonRoll   = 0f;
+		buttonPitch  = 0f;
+		buttonYaw    = 0f;
 	}
 	
 	public void Update() 
