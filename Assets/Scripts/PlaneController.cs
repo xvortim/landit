@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Airplane : MonoBehaviour
 {
@@ -44,6 +45,63 @@ public class Airplane : MonoBehaviour
 	[SerializeField] Transform elevator;
 	[SerializeField] Transform rudder;
 	
+	//UI Buttons//
+	
+	//UI buttons (legacy)
+	public Button pitchupButton;   
+	public Button pitchdownButton; 
+	public Button rollleftButton;  
+	public Button rollrightButton; 
+	public Button yawleftButton;   
+	public Button yawrightButton;
+	
+	public float buttonPitchUp;
+	public float buttonPitchDown;
+	public float buttonRollRight;
+	public float buttonRollLeft;
+	public float buttonYaw;
+	
+	//-Handle UI buttons-//
+	
+	public void pitchPlaneDownButton(bool statusPitchDown) {
+		if(statusPitchDown)
+		    buttonPitchDown = 1.0f;
+		else
+			buttonPitchDown = 0.0f;
+	}
+	public void pitchPlaneUpButton(bool statusPitchUp) {
+		if(statusPitchUp)
+			buttonPitchUp = -1.0f;
+		else
+			buttonPitchUp = 0.0f;
+	}
+
+	public void rollPlaneRightButton(bool statusRoll) {
+		if(statusRoll)
+			buttonRollRight = 1.0f;
+		else
+			buttonRollRight = 0.0f;
+	}
+	public void rollPlaneLeftButton(bool statusRoll) {
+		if(statusRoll)
+			buttonRollLeft = -1.0f;
+		else
+			buttonRollLeft = 0.0f;
+	}
+	
+	public void yawPlaneRightButton(bool statusYaw) {
+		if(statusYaw)
+			buttonYaw = 1.0f;
+		else
+			buttonYaw = 0.0f;
+	}
+	public void yawPlaneLeftButton(bool statusYaw) {
+		if(statusYaw)
+			buttonYaw = -1.0f;
+		else
+			buttonYaw = 0.0f;
+	}
+	
 	//---//
 	
 	public void HandleInputs() {
@@ -52,9 +110,11 @@ public class Airplane : MonoBehaviour
 		pitch = Input.GetAxis("Pitch");
 		yaw   = Input.GetAxis("Yaw");
 		
-		roll  += hudUpdater.buttonRoll;
-		pitch += hudUpdater.buttonPitch;
-		yaw   += hudUpdater.buttonYaw;
+		if(menuScript.mobileOn) {
+			roll  = buttonRollRight + buttonRollLeft; 
+			pitch = buttonPitchDown + buttonPitchUp; Debug.Log(pitch);
+			yaw   = buttonYaw;
+		}
 		
 		// Set throttle behaviour
 		if(menuScript.mobileOn) {
