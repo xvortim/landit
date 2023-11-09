@@ -6,6 +6,5 @@
         <ui:Button text="MENU" parse-escape-sequences="true" display-tooltip-when-elided="true" name="menu" style="width: 7%; height: 7%; position: absolute; top: auto; left: 2%; bottom: 2%; font-size: 11px; -unity-font-style: bold-and-italic;" />
         <ui:Button text="RESTART" parse-escape-sequences="true" display-tooltip-when-elided="true" name="restart" style="width: 7%; height: 7%; position: absolute; top: auto; left: 2%; bottom: 10%; font-size: 11px; -unity-font-style: bold-and-italic;" />
         <ui:SliderInt picking-mode="Ignore" value="100" high-value="100" direction="Vertical" name="throttle" style="position: absolute; height: 50%; top: auto; left: auto; right: 1%; bottom: 25%; width: 10%; align-items: flex-start; flex-direction: column; justify-content: flex-end; align-self: auto; min-width: 5%; -unity-font-style: bold; -unity-text-align: upper-left;" />
-        <ui:Button text="Flaps" parse-escape-sequences="true" display-tooltip-when-elided="true" name="flaps" style="width: 7%; height: 7%; position: absolute; top: auto; left: auto; bottom: 7%; font-size: 11px; -unity-font-style: bold; right: 2%;" />
     </ui:VisualElement>
 </ui:UXML>

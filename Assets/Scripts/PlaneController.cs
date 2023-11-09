@@ -105,6 +105,20 @@ public class Airplane : MonoBehaviour
 			buttonYawLeft = 0.0f;
 	}
 	
+	public void flapsDown() {
+		if(!flapsCon) {
+			flaps.transform.Rotate(-15f, 0, 0);
+			flapsCon = true;
+		} 
+	}
+	
+	public void flapsUp() {
+		if(flapsCon) {
+			flaps.transform.Rotate(15f, 0, 0);
+			flapsCon = false;
+		} 
+	}
+	
 	//---//
 	
 	public void HandleInputs() {
@@ -209,18 +223,12 @@ public class Airplane : MonoBehaviour
 		
 		// FlapsDown
 		if(Input.GetKey(KeyCode.F)) {
-			if(!flapsCon) {
-				flaps.transform.Rotate(-15f, 0, 0);
-				flapsCon = true;
-			} 
+			flapsDown();
 		}
 
 		// FlapsUp	
 		if(Input.GetKey(KeyCode.G)) {
-			if(flapsCon) {
-				flaps.transform.Rotate(15f, 0, 0);
-				flapsCon = false;
-			} 
+			flapsUp();			
 		}
 	}
 		

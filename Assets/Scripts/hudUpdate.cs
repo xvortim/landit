@@ -4,18 +4,15 @@ using UnityEngine.SceneManagement;
 
 public class hudUpdater : MonoBehaviour
 {
-	public static float sliderValue;
-	public static bool flapsUI = false;
-		
 	//UI toolkit buttons
 	public Label labelElement;
 	public Label helpElement;
 	public Label compassElement;
 		
-	public Button flapsElement;
 	public Button restartElement;
 	public Button menuElement;
 	public SliderInt throttleElement;
+	public static float sliderValue;
 	
 	public void Start()
     {
@@ -23,7 +20,6 @@ public class hudUpdater : MonoBehaviour
 		labelElement     = root.Q<Label>("hud");
 		helpElement      = root.Q<Label>("help");
 		compassElement   = root.Q<Label>("compass");
-		flapsElement     = root.Q<Button>("flaps");
 		throttleElement  = root.Q<SliderInt>("throttle");
 	}
 	
@@ -44,12 +40,10 @@ public class hudUpdater : MonoBehaviour
 			restartElement.style.display = DisplayStyle.None;
 			menuElement.style.display = DisplayStyle.None;
 			throttleElement.style.display = DisplayStyle.None;
-			flapsElement.style.display    = DisplayStyle.None;
 		} else {
 			helpElement.text =  "";
 		}
 
-		flapsElement.clicked      += () => {Airplane.flapsCon = !Airplane.flapsCon; flapsUI = !flapsUI;};
 		sliderValue = throttleElement.value;
 	}
 	
