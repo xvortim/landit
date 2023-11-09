@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Airplane : MonoBehaviour
 {
@@ -44,6 +45,80 @@ public class Airplane : MonoBehaviour
 	[SerializeField] Transform elevator;
 	[SerializeField] Transform rudder;
 	
+	//UI Buttons//
+	
+	//UI buttons (legacy)
+	public Canvas uiCanvas;
+	
+	public Button pitchupButton;   
+	public Button pitchdownButton; 
+	public Button rollleftButton;  
+	public Button rollrightButton; 
+	public Button yawleftButton;   
+	public Button yawrightButton;
+	
+	public float buttonPitchUp;
+	public float buttonPitchDown;
+	public float buttonRollRight;
+	public float buttonRollLeft;
+	public float buttonYawRight;
+	public float buttonYawLeft;
+	
+	//-Handle UI buttons-//
+	
+	public void pitchPlaneDownButton(bool statusPitchDown) {
+		if(statusPitchDown)
+		    buttonPitchDown = 1.0f;
+		else
+			buttonPitchDown = 0.0f;
+	}
+	public void pitchPlaneUpButton(bool statusPitchUp) {
+		if(statusPitchUp)
+			buttonPitchUp = -1.0f;
+		else
+			buttonPitchUp = 0.0f;
+	}
+
+	public void rollPlaneRightButton(bool statusRoll) {
+		if(statusRoll)
+			buttonRollRight = 1.0f;
+		else
+			buttonRollRight = 0.0f;
+	}
+	public void rollPlaneLeftButton(bool statusRoll) {
+		if(statusRoll)
+			buttonRollLeft = -1.0f;
+		else
+			buttonRollLeft = 0.0f;
+	}
+	
+	public void yawPlaneRightButton(bool statusYaw) {
+		if(statusYaw)
+			buttonYawRight = 1.0f;
+		else
+			buttonYawRight = 0.0f;
+	}
+	public void yawPlaneLeftButton(bool statusYaw) {
+		if(statusYaw)
+			buttonYawLeft = -1.0f;
+		else
+			buttonYawLeft = 0.0f;
+	}
+	
+	public void flapsDown() {
+		if(!flapsCon) {
+			flaps.transform.Rotate(-15f, 0, 0);
+			flapsCon = true;
+		} 
+	}
+	
+	public void flapsUp() {
+		if(flapsCon) {
+			flaps.transform.Rotate(15f, 0, 0);
+			flapsCon = false;
+		} 
+	}
+	
 	//---//
 	
 	public void HandleInputs() {
@@ -52,9 +127,11 @@ public class Airplane : MonoBehaviour
 		pitch = Input.GetAxis("Pitch");
 		yaw   = Input.GetAxis("Yaw");
 		
-		roll  += hudUpdater.buttonRoll;
-		pitch += hudUpdater.buttonPitch;
-		yaw   += hudUpdater.buttonYaw;
+		if(menuScript.mobileOn) {
+			roll  = buttonRollRight + buttonRollLeft; 
+			pitch = buttonPitchDown + buttonPitchUp;
+			yaw   = buttonYawRight  + buttonYawLeft;
+		}
 		
 		// Set throttle behaviour
 		if(menuScript.mobileOn) {
@@ -82,7 +159,7 @@ public class Airplane : MonoBehaviour
 		// Animations
 		propeller.Rotate(Vector3.forward * throttle);
 		// LeftRoll
-		if(Input.GetKey(KeyCode.A)) {
+		if(Input.GetKey(KeyCode.A) || (buttonRollLeft!=0f) ) {
 			if(lailleron.transform.localRotation != Quaternion.Euler(30, 0, 0)) {
 				lailleron.transform.Rotate(1f, 0, 0);
 				railleron.transform.Rotate(-1f, 0, 0);
@@ -94,7 +171,7 @@ public class Airplane : MonoBehaviour
 			}
 		}
 		// RightRoll
-		if(Input.GetKey(KeyCode.D)) {
+		if(Input.GetKey(KeyCode.D) || (buttonRollRight!=0f) ) {
 			if(railleron.transform.localRotation != Quaternion.Euler(30, 0, 0)) {
 				railleron.transform.Rotate(1f, 0, 0);
 				lailleron.transform.Rotate(-1f, 0, 0);
@@ -107,7 +184,7 @@ public class Airplane : MonoBehaviour
 		}
 		
 		// PitchUp
-		if(Input.GetKey(KeyCode.S)) {
+		if(Input.GetKey(KeyCode.S) || (buttonPitchUp!=0f) ) {
 			if(elevator.transform.localRotation != Quaternion.Euler(30, 0, 0))
 				elevator.transform.Rotate(1f, 0, 0);
 		} else {
@@ -116,7 +193,7 @@ public class Airplane : MonoBehaviour
 			}
 		}
 		// PitchDown
-		if(Input.GetKey(KeyCode.W)) {
+		if(Input.GetKey(KeyCode.W) || (buttonPitchDown != 0f) ) {
 			if(elevator.transform.localRotation != Quaternion.Euler(-30, 0, 0))
 				elevator.transform.Rotate(-1f, 0, 0);
 		} else {
@@ -125,8 +202,8 @@ public class Airplane : MonoBehaviour
 			}
 		}
 		
-		// YawRight
-		if(Input.GetKey(KeyCode.Q)) {
+		// YawLeft
+		if(Input.GetKey(KeyCode.Q) || (buttonYawLeft!=0f) ) {
 			if(rudder.transform.localRotation != Quaternion.Euler(0, 30, 0))
 				rudder.transform.Rotate(0, 1f, 0);
 		} else {
@@ -134,8 +211,8 @@ public class Airplane : MonoBehaviour
 				rudder.transform.Rotate(0, -1f, 0);
 			}
 		}
-		// YawLeft
-		if(Input.GetKey(KeyCode.E)) {
+		// YawRight
+		if(Input.GetKey(KeyCode.E) || (buttonYawRight!=0f) ) {
 			if(rudder.transform.localRotation != Quaternion.Euler(0, -30, 0))
 				rudder.transform.Rotate(0, -1f, 0);
 		} else {
@@ -146,18 +223,12 @@ public class Airplane : MonoBehaviour
 		
 		// FlapsDown
 		if(Input.GetKey(KeyCode.F)) {
-			if(!flapsCon) {
-				flaps.transform.Rotate(-15f, 0, 0);
-				flapsCon = true;
-			} 
+			flapsDown();
 		}
 
 		// FlapsUp	
 		if(Input.GetKey(KeyCode.G)) {
-			if(flapsCon) {
-				flaps.transform.Rotate(15f, 0, 0);
-				flapsCon = false;
-			} 
+			flapsUp();			
 		}
 	}
 		
@@ -168,8 +239,15 @@ public class Airplane : MonoBehaviour
 	}
 	
 	public void Start() {
+		// Canvas
+		if(menuScript.mobileOn)	
+			uiCanvas.enabled = true;
+		else
+			uiCanvas.enabled = false;
+		
+		// Starting values
 		throttle = start*3;
-		hudUpdater.sliderValue = throttle;
+		hudUpdater.throttleElement.value = (int) throttle;
 		rb.velocity = new Vector3(0.0f, 0.0f, start);
 	}
 	
