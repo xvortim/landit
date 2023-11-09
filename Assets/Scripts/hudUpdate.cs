@@ -11,7 +11,7 @@ public class hudUpdater : MonoBehaviour
 		
 	public Button restartElement;
 	public Button menuElement;
-	public SliderInt throttleElement;
+	public static SliderInt throttleElement;
 	public static float sliderValue;
 	
 	public void Start()

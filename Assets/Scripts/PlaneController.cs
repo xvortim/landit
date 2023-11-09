@@ -247,7 +247,7 @@ public class Airplane : MonoBehaviour
 		
 		// Starting values
 		throttle = start*3;
-		hudUpdater.sliderValue = throttle;
+		hudUpdater.throttleElement.value = (int) throttle;
 		rb.velocity = new Vector3(0.0f, 0.0f, start);
 	}
 	
