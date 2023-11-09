@@ -3330,6 +3330,10 @@ PrefabInstance:
       propertyPath: start
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 8764881368617917564, guid: 060dcc39858e12b44822671566bc6506, type: 3}
+      propertyPath: uiCanvas
+      value: 
+      objectReference: {fileID: 419810866}
     m_RemovedComponents:
     - {fileID: 6601491360704109974, guid: 060dcc39858e12b44822671566bc6506, type: 3}
     - {fileID: 4588188825664291553, guid: 060dcc39858e12b44822671566bc6506, type: 3}
@@ -3747,8 +3751,8 @@ SceneRoots:
   - {fileID: 309749369}
   - {fileID: 1775191076}
   - {fileID: 419810867}
-  - {fileID: 1188736360}
   - {fileID: 117116445}
+  - {fileID: 1188736360}
   - {fileID: 1655755300}
   - {fileID: 329490045}
   - {fileID: 1369217738}

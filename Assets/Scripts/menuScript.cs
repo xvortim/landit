@@ -6,8 +6,8 @@ using UnityEngine.UIElements;
 
 public class menuScript : MonoBehaviour
 {
-	public static bool mobileOn = false;
-	public static bool soundOn = true;
+	public static bool mobileOn;
+	public static bool soundOn;
 	
 	public void OnEnable() {
 		VisualElement root = GetComponent<UIDocument>().rootVisualElement;

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class hudUpdater : MonoBehaviour
 {
 	public static float sliderValue;
+	public static bool flapsUI = false;
 		
 	//UI toolkit buttons
 	public Label labelElement;
@@ -48,8 +49,7 @@ public class hudUpdater : MonoBehaviour
 			helpElement.text =  "";
 		}
 
-		flapsElement.clicked      += () => Airplane.flapsCon = !Airplane.flapsCon;
-		
+		flapsElement.clicked      += () => {Airplane.flapsCon = !Airplane.flapsCon; flapsUI = !flapsUI;};
 		sliderValue = throttleElement.value;
 	}
 	
