@@ -9,10 +9,14 @@ public class hudUpdater : MonoBehaviour
 	public Label helpElement;
 	public Label compassElement;
 		
+	public Button rakijaElement;
 	public Button restartElement;
 	public Button menuElement;
 	public static SliderInt throttleElement;
 	public static float sliderValue;
+	
+	public static float drunkness = 0f;
+	public AudioSource cirkSound;
 	
 	public void Start()
     {
@@ -21,6 +25,7 @@ public class hudUpdater : MonoBehaviour
 		helpElement      = root.Q<Label>("help");
 		compassElement   = root.Q<Label>("compass");
 		throttleElement  = root.Q<SliderInt>("throttle");
+		cirkSound        = GetComponent<AudioSource>();
 	}
 	
 	public void Update() 
@@ -50,10 +55,19 @@ public class hudUpdater : MonoBehaviour
 	public void OnEnable() 
 	{
 		VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+		rakijaElement    = root.Q<Button>("rakija");
 		restartElement   = root.Q<Button>("restart");
 		menuElement      = root.Q<Button>("menu");
 		
 		menuElement.clicked     += () => SceneManager.LoadSceneAsync(0);
 		restartElement.clicked  += () => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		rakijaElement .clicked  += () => cirkRakije();
+	}
+	
+	public void cirkRakije()
+	{
+		drunkness+=0.01f;
+		if(menuScript.soundOn)
+			cirkSound.Play();
 	}
 }

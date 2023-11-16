@@ -12,6 +12,10 @@ public class CameraController : MonoBehaviour
 	private int index = 0;
 	private Vector3 target;
 	
+	private void Start() {
+		hudUpdater.drunkness = 0f;	
+	}
+	
 	private void Update() {
 		if(Input.GetKeyDown(KeyCode.Alpha1)) 
 			index = 0;
@@ -26,6 +30,9 @@ public class CameraController : MonoBehaviour
 	}
 	
 	private void LateUpdate() {
+		target.x += Random.Range(-hudUpdater.drunkness, hudUpdater.drunkness);
+		target.y += Random.Range(-hudUpdater.drunkness, hudUpdater.drunkness);
+		target.z += Random.Range(-hudUpdater.drunkness, hudUpdater.drunkness);
 		transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
 		transform.forward  = povs[index].forward;
 	}
